@@ -1,0 +1,31 @@
+# Activer la réécriture d’URL
+RewriteEngine On
+
+# Rediriger vers www si nécessaire
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
+
+# Forcer HTTPS (si SSL est actif)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+
+# Page d’erreur personnalisée
+ErrorDocument 404 /404.html
+
+# Bloquer l'accès à certains fichiers sensibles
+<FilesMatch "\.(htaccess|env|json|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Caching des fichiers statiques (images, CSS, JS)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+</IfModule>
+# Interdire l'affichage du contenu des dossiers
+Options -Indexes
