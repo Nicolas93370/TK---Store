@@ -1,0 +1,16 @@
+TK-store/
+│
+├── index.php
+├── .htaccess
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── script.js
+│   ├── images/
+│   │   ├── logo.png
+│   │   └── produit1.jpg
+│   ├── fonts/
+│   │   └── roboto.woff2
+│   └── icons/
+│       └── panier.svg
